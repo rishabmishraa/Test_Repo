@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rishab Misra — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --card: #1e1e1e;
+      --accent: #e8c84a;
+      --accent2: #4af0c8;
+      --text: #f0ece0;
+      --muted: #888;
+      --border: #2a2a2a;
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo .home-icon {
+      font-size: 1.2rem;
+      color: var(--accent2);
+      transition: transform 0.2s;
+    }
+
+    .logo:hover .home-icon { transform: scale(1.2); }
+
+    nav { display: flex; gap: 8px; }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 16px; right: 16px;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      font-weight: bold;
+      text-decoration: underline;
+      background: rgba(232,200,74,0.07);
+    }
+
+    nav a:hover::after { transform: scaleX(1); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,200,74,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent2);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 48px;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent2);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -8px;
+      width: 48px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .profile-wrap {
+      position: relative;
+    }
+
+    .profile-img {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      object-fit: cover;
+      border: 2px solid var(--border);
+      display: block;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    }
+
+    .profile-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #1e1e2e 0%, #2a1a3e 50%, #1a2e3e 100%);
+      border: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: var(--muted);
+    }
+
+    .profile-placeholder i { font-size: 5rem; color: var(--accent); opacity: 0.7; }
+    .profile-placeholder span { font-size: 0.85rem; }
+
+    .profile-badge {
+      position: absolute;
+      bottom: -14px; right: -14px;
+      background: var(--accent);
+      color: #000;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .about-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .tag {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .skill-card i {
+      font-size: 2.2rem;
+      color: var(--accent);
+    }
+
+    .skill-card .skill-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .skill-card .skill-level {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent2);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent2);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .project-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-pill {
+      background: rgba(232,200,74,0.1);
+      border: 1px solid rgba(232,200,74,0.3);
+      color: var(--accent);
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── RECOMMENDATIONS ── */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .rec-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      position: relative;
+    }
+
+    .rec-card::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.3;
+      position: absolute;
+      top: 12px; left: 20px;
+      line-height: 1;
+    }
+
+    .rec-text {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin-bottom: 20px;
+      padding-top: 24px;
+    }
+
+    .rec-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .rec-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #000;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .rec-author-info strong {
+      display: block;
+      font-size: 0.88rem;
+    }
+
+    .rec-author-info span {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── REC FORM ── */
+    .rec-form-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+
+    .rec-form-wrap h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-submit {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── POPUP ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-overlay.show { display: flex; }
+
+    .popup {
+      background: var(--card);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 40px 48px;
+      text-align: center;
+      max-width: 420px;
+      animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .popup i {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .popup h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .popup p { color: var(--muted); margin-bottom: 24px; }
+
+    .btn-close-popup {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 8px;
+      padding: 10px 28px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-close-popup:hover { background: var(--accent); color: #000; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ──────────────── HEADER ──────────────── -->
+<header>
+  <a href="#" class="logo">
+    <i class="fas fa-house home-icon"></i>
+    Rishab Misra
+  </a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Project Details</a>
+    <a href="#skills">Skills</a>
+    <a href="#recommendations">Recommendations</a>
+  </nav>
+</header>
+
+<!-- ──────────────── HERO ──────────────── -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">// Full-Stack Developer &amp; ML Enthusiast</p>
+    <h1>Building things<br>that <span>matter.</span></h1>
+    <p>I craft elegant web applications and explore machine learning systems that solve real-world problems. Passionate about clean code, intuitive UX, and continuous learning.</p>
+  </div>
+</div>
+
+<hr class="section-divider"/>
+
+<!-- ──────────────── ABOUT ──────────────── -->
+<section id="about">
+  <p class="section-label">// 01 — Introduction</p>
+  <h2 class="section-title">About Me</h2>
+
+  <div class="about-grid">
+    <div class="profile-wrap">
+      <div class="profile-placeholder">
+        <i class="fas fa-user-astronaut"></i>
+        <span>Rishab Misra</span>
+      </div>
+      <div class="profile-badge">Available for Work</div>
+    </div>
+
+    <div class="about-text">
+      <h3>Hey, I'm Rishab Misra👋</h3>
+      <p>
+        I'm a final-year Computer Science student at Lovely Professional University, Jalandhar, with a deep passion for full-stack web development and applied machine learning. Over the past three years, I've built everything from e-commerce platforms to NLP-powered chatbots.
+      </p>
+      <p>
+        When I'm not coding, you'll find me contributing to open-source projects, reading about distributed systems, or mentoring juniors at my university's coding club. I believe great software is the intersection of technical excellence and empathetic design.
+      </p>
+      <p>
+        I'm currently seeking full-time opportunities in software engineering where I can contribute, grow, and continue learning.
+      </p>
+      <div class="about-tags">
+        <span class="tag">🎓 B.Tech CSE</span>
+        <span class="tag">📍 Coochbehar, India</span>
+        <span class="tag">🔭 Open to Opportunities</span>
+        <span class="tag">💡 Problem Solver</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- ──────────────── SKILLS ──────────────── -->
+<section id="skills">
+  <p class="section-label">// 02 — Expertise</p>
+  <h2 class="section-title">Skills</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <i class="fab fa-html5"></i>
+      <span class="skill-name">HTML5</span>
+      <span class="skill-level">Advanced</span>
+    </div>
+    <div class="skill-card">
+      <i class="fab fa-css3-alt"></i>
+      <span class="skill-name">CSS3</span>
+      <span class="skill-level">Advanced</span>
+    </div>
+    <div class="skill-card">
+      <i class="fab fa-js-square"></i>
+      <span class="skill-name">JavaScript</span>
+      <span class="skill-level">Advanced</span>
+    </div>
+    <div class="skill-card">
+      <i class="fab fa-python"></i>
+      <span class="skill-name">Python</span>
+      <span class="skill-level">Intermediate</span>
+    </div>
+    <div class="skill-card">
+      <i class="fab fa-react"></i>
+      <span class="skill-name">React.js</span>
+      <span class="skill-level">Intermediate</span>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- ──────────────── PROJECTS ──────────────── -->
+<section id="projects">
+  <p class="section-label">// 03 — Work</p>
+  <h2 class="section-title">Project Details</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <p class="project-num">PROJECT 01</p>
+      <h3>SmartCart — E-Commerce Platform</h3>
+      <p>A full-stack e-commerce platform with real-time inventory management, Razorpay payment integration, and an AI-powered product recommendation engine that increased average order value by 22%.</p>
+      <div class="project-tech">
+        <span class="tech-pill">React</span>
+        <span class="tech-pill">Node.js</span>
+        <span class="tech-pill">MongoDB</span>
+        <span class="tech-pill">Razorpay API</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-num">PROJECT 02</p>
+      <h3>LinguaBot — NLP Chatbot</h3>
+      <p>A context-aware customer service chatbot built using transformer-based NLP models. Trained on domain-specific data, it handles 80% of customer queries autonomously with 94% accuracy.</p>
+      <div class="project-tech">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">HuggingFace</span>
+        <span class="tech-pill">FastAPI</span>
+        <span class="tech-pill">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-num">PROJECT 03</p>
+      <h3>DevTrack — Project Management Tool</h3>
+      <p>A collaborative project management app inspired by Jira, featuring Kanban boards, sprint planning, time tracking, and GitHub integration for seamless developer workflows.</p>
+      <div class="project-tech">
+        <span class="tech-pill">Vue.js</span>
+        <span class="tech-pill">Django</span>
+        <span class="tech-pill">PostgreSQL</span>
+        <span class="tech-pill">GitHub API</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- ──────────────── RECOMMENDATIONS ──────────────── -->
+<section id="recommendations">
+  <p class="section-label">// 04 — Testimonials</p>
+  <h2 class="section-title">Recommendations</h2>
+
+  <div class="rec-grid" id="rec-list">
+
+    <div class="rec-card">
+      <p class="rec-text">Rishab is one of the most dedicated developers I've had the pleasure of mentoring. He picks up new technologies remarkably fast and always delivers clean, well-documented code. A genuine asset to any engineering team.</p>
+      <div class="rec-author">
+        <div class="rec-avatar">PS</div>
+        <div class="rec-author-info">
+          <strong>Prof. Priya Singh</strong>
+          <span>HOD, CS Dept — Lovely Professional University</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rec-card">
+      <p class="rec-text">Working with Rishab on our startup's backend was a great experience. He architected our entire API layer from scratch, brought performance optimizations we hadn't considered, and was always available when we needed him.</p>
+      <div class="rec-author">
+        <div class="rec-avatar">RK</div>
+        <div class="rec-author-info">
+          <strong>Rahul Khanna</strong>
+          <span>Co-Founder — TechNest Labs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rec-card">
+      <p class="rec-text">Arjun led our college's open-source club with incredible energy and vision. He organized hackathons, built our club's website, and helped over 40 juniors land their first internships. A true community builder.</p>
+      <div class="rec-author">
+        <div class="rec-avatar">NA</div>
+        <div class="rec-author-info">
+          <strong>Neha Arora</strong>
+          <span>Club President — CodeForge Society</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADD RECOMMENDATION FORM -->
+  <div class="rec-form-wrap">
+    <h3>Leave a Recommendation</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="rec-name" placeholder="e.g. Jane Doe"/>
+      </div>
+      <div class="form-group">
+        <label>Your Role</label>
+        <input type="text" id="rec-role" placeholder="e.g. Senior Engineer at Google"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Your Recommendation</label>
+      <textarea id="rec-text" placeholder="Share your experience working with Rishab..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitRecommendation()">Submit Recommendation</button>
+  </div>
+</section>
+
+<!-- ──────────────── POPUP ──────────────── -->
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup">
+    <i class="fas fa-check-circle"></i>
+    <h3>Thank You!</h3>
+    <p>Thank you for leaving a recommendation!<br>Your kind words mean a lot.</p>
+    <button class="btn-close-popup" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer>
+  <p>© 2025 Rishab Misra — Built with ❤️ and lots of ☕</p>
+</footer>
+
+<script>
+  function submitRecommendation() {
+    const name = document.getElementById('rec-name').value.trim();
+    const role = document.getElementById('rec-role').value.trim();
+    const text = document.getElementById('rec-text').value.trim();
+
+    if (!name || !text) {
+      alert('Please fill in at least your name and recommendation.');
+      return;
+    }
+
+    // Build initials
+    const initials = name.split(' ').map(w => w[0].toUpperCase()).join('').slice(0, 2);
+
+    // Create new card
+    const card = document.createElement('div');
+    card.className = 'rec-card';
+    card.innerHTML = `
+      <p class="rec-text">${text}</p>
+      <div class="rec-author">
+        <div class="rec-avatar">${initials}</div>
+        <div class="rec-author-info">
+          <strong>${name}</strong>
+          <span>${role || 'Community Member'}</span>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('rec-list').appendChild(card);
+
+    // Reset form
+    document.getElementById('rec-name').value = '';
+    document.getElementById('rec-role').value = '';
+    document.getElementById('rec-text').value = '';
+
+    // Show popup
+    document.getElementById('popup-overlay').classList.add('show');
+  }
+
+  function closePopup() {
+    document.getElementById('popup-overlay').classList.remove('show');
+  }
+
+  // Close on overlay click
+  document.getElementById('popup-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+</script>
+
+</body>
+</html>
